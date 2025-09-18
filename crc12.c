@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-
 #define CRC_DEGREE 12
 #define CRC_POLY 0x180F
-
 static unsigned long binstr_to_ul(const char *s) {
     unsigned long v = 0;
     for (; *s; ++s) {
@@ -11,8 +9,6 @@ static unsigned long binstr_to_ul(const char *s) {
     }
     return v;
 }
-
-
 static void ul_to_binstr(unsigned long v, int len, char *out) {
     out[len] = '\0';
     for (int i = len - 1; i >= 0; --i) {
@@ -20,12 +16,9 @@ static void ul_to_binstr(unsigned long v, int len, char *out) {
         v >>= 1;
     }
 }
-
 int main(void) {
     char msg[256];
-    printf (" Enter binary message (e.g. , 1101011011) : ") ;
     scanf(" %255s", msg);
-
     int mlen = (int)strlen(msg);
     unsigned long dividend = binstr_to_ul(msg) << CRC_DEGREE;
     int total_bits = mlen + CRC_DEGREE;
@@ -39,12 +32,9 @@ int main(void) {
             dividend ^= aligned;
         }
     }
-
     unsigned long crc = dividend & ((1UL << CRC_DEGREE) - 1);
     char out[CRC_DEGREE + 1];
     ul_to_binstr(crc, CRC_DEGREE, out);
-
     printf("CRC-12: %s\nCodeword: %s%s\n", out, msg, out);
-
     return 0;
 }
