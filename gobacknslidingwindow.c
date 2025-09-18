@@ -4,13 +4,13 @@
 
 #define ll int
 
-void transmission(ll i, ll N, ll tf, ll tt) {
+void transmission(ll i, ll N, ll tf, ll *tt) {
   while (i <= tf) {
     int z = 0;
     for (int k = i; k < i + N && k <= tf; k++) {
       //cout << "Sending Frame " << k << "..." << endl;
       printf("Sending frame %d ...\n",k);
-      tt++;
+      (*tt)++;
     }
     for (int k = i; k < i + N && k <= tf; k++) {
       int f = rand() % 2;
@@ -42,7 +42,7 @@ int main() {
   printf("Enter the Window Size : ");
   //cin >> N;
   scanf("%d",&N);
-  transmission(i,N,tf,tt);
+  transmission(i,N,tf,&tt);
   //cout << "Total number of frames which were sent and resent are : " << tt <<
   printf("Total number of frames which were sent and resent are : %d",tt);
     //endl;
